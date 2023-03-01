@@ -1,5 +1,5 @@
 import { User } from "./../entities/users.entities";
-import { Repository } from "typeorm";
+import { DeepPartial, Repository } from "typeorm";
 import {
     createUserSchema,
     createUserSchemaReturn,
@@ -10,5 +10,6 @@ type IUser = z.infer<typeof createUserSchema>;
 type IUserReturn = z.infer<typeof createUserSchemaReturn>;
 type IUserRepo = Repository<User>;
 type IMultipleUsers = Array<IUserReturn>;
+type IUserPartial = DeepPartial<IUser>;
 
-export type { IUser, IUserReturn, IUserRepo, IMultipleUsers };
+export type { IUser, IUserReturn, IUserRepo, IMultipleUsers, IUserPartial };

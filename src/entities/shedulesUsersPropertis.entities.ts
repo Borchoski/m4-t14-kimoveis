@@ -1,9 +1,9 @@
-import { Real_Estate } from "./realState.entities";
+import { RealEstate } from "./realState.entities";
 import { User } from "./users.entities";
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
 
 @Entity("shedules_users_properties")
-export class ShedulesUsersProperties {
+export class Schedule {
     @PrimaryGeneratedColumn("increment")
     id: number;
 
@@ -16,6 +16,6 @@ export class ShedulesUsersProperties {
     @ManyToOne(() => User)
     user: User;
 
-    @ManyToOne(() => Real_Estate)
-    realEstate: Real_Estate;
+    @ManyToOne(() => RealEstate)
+    realEstate: RealEstate;
 }

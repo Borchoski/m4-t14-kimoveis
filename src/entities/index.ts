@@ -1,7 +1,7 @@
 import { User } from "./users.entities";
 import { Address } from "./adresses.entities";
-import { Categories } from "./categories.entities";
-import { Real_Estate } from "./realState.entities";
-import { ShedulesUsersProperties } from "./shedulesUsersPropertis.entities";
+import { Category } from "./categories.entities";
+import { RealEstate } from "./realState.entities";
+import { Schedule } from "./shedulesUsersPropertis.entities";
 
-export { User, Address, Categories, Real_Estate, ShedulesUsersProperties };
+export { User, Address, Category, RealEstate, Schedule };

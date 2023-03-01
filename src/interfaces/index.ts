@@ -1,3 +1,9 @@
-import { IUser, IUserReturn, IUserRepo } from "./users.interfaces";
+import {
+    IUser,
+    IUserReturn,
+    IUserRepo,
+    IMultipleUsers,
+    IUserPartial,
+} from "./users.interfaces";
 
-export { IUser, IUserReturn, IUserRepo };
+export { IUser, IUserReturn, IUserRepo, IMultipleUsers, IUserPartial };

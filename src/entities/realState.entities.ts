@@ -1,4 +1,4 @@
-import { Categories } from "./categories.entities";
+import { Category } from "./categories.entities";
 import { Address } from "./adresses.entities";
 import {
     Entity,
@@ -11,7 +11,7 @@ import {
 } from "typeorm";
 
 @Entity("real_estate")
-export class Real_Estate {
+export class RealEstate {
     @PrimaryGeneratedColumn("increment")
     id: number;
 
@@ -34,7 +34,7 @@ export class Real_Estate {
     @JoinColumn()
     address: Address;
 
-    @OneToOne(() => Categories)
+    @OneToOne(() => Category)
     @JoinColumn()
-    category: Categories;
+    category: Category;
 }

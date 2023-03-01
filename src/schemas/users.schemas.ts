@@ -17,5 +17,11 @@ const createUserSchemaReturn = createUserSchema
     .omit({ password: true });
 
 const userSchemaMultiples = createUserSchemaReturn.array();
+const updateUserSchema = createUserSchema.partial();
 
-export { createUserSchema, createUserSchemaReturn, userSchemaMultiples };
+export {
+    createUserSchema,
+    createUserSchemaReturn,
+    userSchemaMultiples,
+    updateUserSchema,
+};
