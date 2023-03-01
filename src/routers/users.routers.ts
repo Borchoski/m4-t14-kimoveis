@@ -1,3 +1,4 @@
+import { verifyPermission } from "./../middlewares/veryfyPermission.middlewares";
 import { verifyData, verifyUserId } from "../middlewares";
 import { createUserSchema, updateUserSchema } from "./../schemas/users.schemas";
 import { Router } from "express";
@@ -11,11 +12,16 @@ import {
 export const usersRouter: Router = Router();
 
 usersRouter.post("", verifyData(createUserSchema), createUserController);
-usersRouter.get("", retriveUsersController);
+usersRouter.get("", verifyPermission, retriveUsersController);
 usersRouter.patch(
     "/:id",
     verifyData(updateUserSchema),
     verifyUserId,
     updateUserController
 );
-usersRouter.delete("/:id", verifyUserId, deleteUserController);
+usersRouter.delete(
+    "/:id",
+    verifyUserId,
+    verifyPermission,
+    deleteUserController
+);

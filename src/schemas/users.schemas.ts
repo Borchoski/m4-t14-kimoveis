@@ -17,11 +17,17 @@ const createUserSchemaReturn = createUserSchema
     .omit({ password: true });
 
 const userSchemaMultiples = createUserSchemaReturn.array();
-const updateUserSchema = createUserSchema.partial();
+const updateUserSchema = createUserSchema.omit({ admin: true }).partial();
+
+const loginSchema = createUserSchema.omit({
+    admin: true,
+    name: true,
+});
 
 export {
     createUserSchema,
     createUserSchemaReturn,
     userSchemaMultiples,
     updateUserSchema,
+    loginSchema,
 };
