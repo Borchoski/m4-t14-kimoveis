@@ -7,4 +7,6 @@ export class Category {
 
     @Column({ length: 45, unique: true })
     name: string;
+
+    //oneToMany
 }

@@ -4,6 +4,7 @@ import { verifyPermission } from "./../middlewares/veryfyPermission.middlewares"
 import {
     createCategoryController,
     retriveCategoriesController,
+    retriveEstatesByCategoryController,
 } from "./../controllers/categories.controllers";
 import { Router } from "express";
 
@@ -16,3 +17,4 @@ categoriesRouter.post(
     createCategoryController
 );
 categoriesRouter.get("", retriveCategoriesController);
+categoriesRouter.get("/:id/realEstate", retriveEstatesByCategoryController);

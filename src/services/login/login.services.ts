@@ -22,7 +22,7 @@ export const loginServices = async (userData: IUserLoginRequest) => {
     }
 
     const token: string = sign(
-        { email: user.email, admin: user.admin },
+        { email: user.email, admin: user.admin, id: user.id },
         process.env.SECRET_KEY!,
         { expiresIn: "24h", subject: String(user.id) }
     );

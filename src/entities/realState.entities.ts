@@ -8,6 +8,8 @@ import {
     UpdateDateColumn,
     OneToOne,
     JoinColumn,
+    BeforeInsert,
+    ManyToOne,
 } from "typeorm";
 
 @Entity("real_estate")
@@ -30,11 +32,10 @@ export class RealEstate {
     @UpdateDateColumn()
     updatedAt: string;
 
-    @OneToOne(() => Address)
+    @OneToOne(() => Address, { cascade: true, nullable: false })
     @JoinColumn()
     address: Address;
 
-    @OneToOne(() => Category)
-    @JoinColumn()
+    @ManyToOne(() => Category)
     category: Category;
 }

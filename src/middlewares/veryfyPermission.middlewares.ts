@@ -28,6 +28,7 @@ export const verifyPermission = async (
             req.user = {
                 id: decoded.subject,
                 admin: decoded.admin,
+                email: decoded.email,
             };
 
             return next();
