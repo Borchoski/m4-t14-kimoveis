@@ -1,24 +1,28 @@
+import { returnManyEstatesByCategory } from "./../../schemas/category.schemas";
 import { AppError } from "./../../errors";
 import { Category, RealEstate } from "./../../entities";
 import { AppDataSource } from "./../../data-source";
 export const retriverEstatesByCategoryService = async (id: number) => {
     const categoriesRepo = AppDataSource.getRepository(Category);
-    const estatesRepo = AppDataSource.getRepository(RealEstate);
+    const categoty = await categoriesRepo.findOneBy({ id: id });
+    const categoryId = categoty?.id;
 
-    if (!(await categoriesRepo.findOneBy({ id: id }))) {
+    if (!categoty) {
         throw new AppError("Category not found", 404);
     }
 
-    const estatesByCategories = await estatesRepo.find({
-        relations: {
-            category: true,
-        },
-        where: {
-            category: {
-                id: id,
-            },
-        },
-    });
+    const values = await AppDataSource.getRepository(RealEstate)
+        .createQueryBuilder("realEstate")
+        .leftJoinAndSelect("realEstate.category", "category")
+        .where("realEstate.category = :categoryId", { categoryId })
+        .select("realEstate")
+        .getMany();
 
-    return estatesByCategories;
+    const ret = {
+        id: categoty.id,
+        name: categoty.name,
+        realEstate: values,
+    };
+
+    return ret;
 };

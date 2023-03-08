@@ -7,9 +7,11 @@ export const createSchedulesController = async (
     res: Response
 ) => {
     const token: string = req.headers.authorization!;
-    const newSchedules = await createSchedulesServices(req.body, token);
+    await createSchedulesServices(req.body, token);
 
-    return res.json(newSchedules);
+    return res.status(201).json({
+        message: "Schedule created",
+    });
 };
 
 export const retriverAllSchedulesController = async (

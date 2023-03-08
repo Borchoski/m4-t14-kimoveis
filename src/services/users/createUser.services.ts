@@ -13,10 +13,7 @@ export const createUserService = async (
         throw new AppError("Email already exists", 409);
     }
 
-    const user = usersRepo.create({
-        ...userData,
-        password: await hash(userData.password, 10),
-    });
+    const user = usersRepo.create(userData);
 
     await usersRepo.save(user);
 

@@ -32,7 +32,7 @@ export class RealEstate {
     @UpdateDateColumn({ type: "date" })
     updatedAt: string;
 
-    @OneToOne(() => Address)
+    @OneToOne(() => Address, { cascade: true })
     @JoinColumn()
     address: Address;
 

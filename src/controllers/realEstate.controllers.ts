@@ -8,7 +8,7 @@ export const createRealEstateController = async (
 ) => {
     const newRealEstate = await createRealEstateService(req.body);
 
-    return res.json(newRealEstate);
+    return res.status(201).json(newRealEstate);
 };
 
 export const retriverEstatesController = async (

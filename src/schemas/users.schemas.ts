@@ -10,9 +10,9 @@ const createUserSchema = z.object({
 const createUserSchemaReturn = createUserSchema
     .extend({
         id: z.number(),
-        createdAt: z.number(),
-        updatedAt: z.number(),
-        deletedAt: z.number().nullable(),
+        createdAt: z.string(),
+        updatedAt: z.string(),
+        deletedAt: z.string().nullable(),
     })
     .omit({ password: true });
 

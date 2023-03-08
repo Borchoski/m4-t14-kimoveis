@@ -15,22 +15,18 @@ export const verifyToken = (
 
     token = token.split(" ")[1];
 
-    if (token == "12345") {
-        throw new AppError("jwt malformed", 401);
-    }
-
-    if (token == "invalid_signature") {
-        throw new AppError("invalid signature", 401);
-    }
-
     return verify(
         token,
         String(process.env.SECRET_KEY),
         async (error: any, decoded: any) => {
             if (error) throw new AppError(error.message, 401);
 
+            if (!decoded) {
+                throw new AppError("invalid signature", 401);
+            }
+
             req.user = {
-                id: decoded.subject,
+                id: decoded.sub,
                 admin: decoded.admin,
                 email: decoded.email,
             };

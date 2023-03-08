@@ -12,8 +12,6 @@ export const loginServices = async (userData: IUserLoginRequest) => {
         email: userData.email,
     });
 
-    console.log(user, userData);
-
     if (!user) {
         throw new AppError("Invalid credentials", 401);
     }

@@ -10,25 +10,27 @@ export const updateUserService = async (
     userReq: any
 ) => {
     const userRepo = AppDataSource.getRepository(User);
+    const reqUser = await userRepo.findOneBy({
+        id: id,
+    });
 
     if (userData.email) {
         if (
             await userRepo.findOneBy({
-                name: userData.name!,
+                email: userData.email,
             })
         ) {
-            throw new AppError("Email already exists.", 409);
+            if (userData.email != userReq.email) {
+                throw new AppError("Email already exists.", 409);
+            }
         }
     }
 
-    if (userReq.admin == false) {
-        if (userData.email != userReq.email) {
-            throw new AppError("Nao pode hein", 403);
-        }
+    console.log(userReq);
 
-        const userAdmin = await userRepo.findOneBy({ id: id });
-        if (userAdmin!.admin == true) {
-            throw new AppError("Nao pode hein", 403);
+    if (userReq.admin == false) {
+        if (reqUser?.id != userReq.id) {
+            throw new AppError("Insufficient permission", 403);
         }
 
         const oldData = await userRepo.findOneBy({
