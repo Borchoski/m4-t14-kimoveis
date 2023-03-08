@@ -1,3 +1,4 @@
+import { verifyToken } from "./../middlewares/verifyToken.middlewares";
 import { verifyPermission } from "./../middlewares/veryfyPermission.middlewares";
 import { verifyData, verifyUserId } from "../middlewares";
 import { createUserSchema, updateUserSchema } from "./../schemas/users.schemas";
@@ -16,6 +17,7 @@ usersRouter.get("", verifyPermission, retriveUsersController);
 usersRouter.patch(
     "/:id",
     verifyData(updateUserSchema),
+    verifyToken,
     verifyUserId,
     updateUserController
 );

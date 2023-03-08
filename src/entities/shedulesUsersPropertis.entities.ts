@@ -10,7 +10,7 @@ export class Schedule {
     @Column({ type: "date" })
     date: string;
 
-    @Column({ type: "timestamp" })
+    @Column({})
     hour: string;
 
     @ManyToOne(() => User)

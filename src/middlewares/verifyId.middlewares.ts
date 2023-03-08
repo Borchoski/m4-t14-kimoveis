@@ -15,7 +15,7 @@ export const verifyUserId = async (
             id: +req.params.id,
         }))
     ) {
-        throw new AppError("Id not found.", 404);
+        throw new AppError("User not found", 404);
     }
 
     return next();

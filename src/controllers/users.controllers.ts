@@ -20,9 +20,9 @@ export const retriveUsersController = async (req: Request, res: Response) => {
 
 export const updateUserController = async (req: Request, res: Response) => {
     const id: number = +req.params.id;
-    const user = await updateUserService(req.body, id);
+    const user = await updateUserService(req.body, id, req.user);
 
-    return res.status(201).json(user);
+    return res.status(200).json(user);
 };
 
 export const deleteUserController = async (req: Request, res: Response) => {

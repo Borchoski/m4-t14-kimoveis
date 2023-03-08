@@ -1,3 +1,4 @@
+import { verifyToken } from "./../middlewares/verifyToken.middlewares";
 import { createCategorySchema } from "./../schemas/category.schemas";
 import { verifyData } from "./../middlewares/verifyData.middlewares";
 import { verifyPermission } from "./../middlewares/veryfyPermission.middlewares";
@@ -12,6 +13,7 @@ export const categoriesRouter: Router = Router();
 
 categoriesRouter.post(
     "",
+    verifyToken,
     verifyPermission,
     verifyData(createCategorySchema),
     createCategoryController

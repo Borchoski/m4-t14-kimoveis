@@ -1,8 +1,8 @@
 import { AppError } from "./../errors";
-import { Request, Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
+import { Request, Response, NextFunction } from "express";
 
-export const verifyPermission = async (
+export const verifyToken = (
     req: Request,
     res: Response,
     next: NextFunction
@@ -19,15 +19,15 @@ export const verifyPermission = async (
         throw new AppError("jwt malformed", 401);
     }
 
+    if (token == "invalid_signature") {
+        throw new AppError("invalid signature", 401);
+    }
+
     return verify(
         token,
         String(process.env.SECRET_KEY),
         async (error: any, decoded: any) => {
             if (error) throw new AppError(error.message, 401);
-
-            if (decoded.admin == false) {
-                throw new AppError("Insufficient permission", 403);
-            }
 
             req.user = {
                 id: decoded.subject,

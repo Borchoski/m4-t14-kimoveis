@@ -12,13 +12,19 @@ export const loginServices = async (userData: IUserLoginRequest) => {
         email: userData.email,
     });
 
+    console.log(user, userData);
+
     if (!user) {
-        throw new AppError("Invalid email or password!", 401);
+        throw new AppError("Invalid credentials", 401);
+    }
+
+    if (user.deletedAt) {
+        throw new AppError("Invalid credentials", 401);
     }
 
     const pwdMatch: boolean = await compare(userData.password, user.password);
     if (!pwdMatch) {
-        throw new AppError("Invalid email or password!", 401);
+        throw new AppError("Invalid credentials", 401);
     }
 
     const token: string = sign(

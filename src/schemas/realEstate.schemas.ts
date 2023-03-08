@@ -3,6 +3,7 @@ import { z } from "zod";
 export const createRealEstateSchema = z.object({
     value: z.number(),
     size: z.number().int(),
+    sold: z.boolean(),
     address: z.object({
         street: z.string(),
         zipCode: z.string(),

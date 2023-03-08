@@ -1,3 +1,4 @@
+import { verifyToken } from "./../middlewares/verifyToken.middlewares";
 import { verifyPermission } from "./../middlewares/veryfyPermission.middlewares";
 import { createRealEstateSchema } from "./../schemas/realEstate.schemas";
 import { verifyData } from "./../middlewares/verifyData.middlewares";
@@ -12,6 +13,7 @@ export const realEstateRouter: Router = Router();
 realEstateRouter.post(
     "",
     verifyData(createRealEstateSchema),
+    verifyToken,
     verifyPermission,
     createRealEstateController
 );

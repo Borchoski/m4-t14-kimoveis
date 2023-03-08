@@ -10,14 +10,17 @@ export const createUserService = async (
 ): Promise<IUserReturn> => {
     const usersRepo: IUserRepo = AppDataSource.getRepository(User);
     if (await usersRepo.exist({ where: { email: userData.email } })) {
-        throw new AppError("Email already exists.", 409);
+        throw new AppError("Email already exists", 409);
     }
 
     const user = usersRepo.create({
         ...userData,
         password: await hash(userData.password, 10),
     });
+
     await usersRepo.save(user);
 
-    return createUserSchemaReturn.parse(user);
+    const userReturn = createUserSchemaReturn.parse(user);
+
+    return userReturn;
 };

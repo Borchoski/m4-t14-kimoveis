@@ -3,16 +3,16 @@ import { z } from "zod";
 const createUserSchema = z.object({
     name: z.string().max(45),
     email: z.string().email(),
-    admin: z.boolean().default(false),
+    admin: z.boolean().optional().default(false),
     password: z.string().max(120),
 });
 
 const createUserSchemaReturn = createUserSchema
     .extend({
         id: z.number(),
-        createdAt: z.date(),
-        updatedAt: z.date(),
-        deletedAt: z.date().nullable(),
+        createdAt: z.number(),
+        updatedAt: z.number(),
+        deletedAt: z.number().nullable(),
     })
     .omit({ password: true });
 

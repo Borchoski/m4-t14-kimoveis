@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const createSchedule = z.object({
-    date: z.date(),
+    date: z.string(),
     hour: z.string(),
-    propertie: z.number().int(),
+    realEstateId: z.number().int(),
 });
